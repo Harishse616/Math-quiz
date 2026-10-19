@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Math Quest | Class 10 Quiz Lab</title>
+    <meta name="description" content="A friendly timed Class 10 mathematics quiz across 14 question patterns.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <a class="brand" href="#top" aria-label="Math Quest home">
+                <span class="brand-mark">π</span>
+                <span>Math Quest</span>
+            </a>
+            <div class="topbar-actions">
+                <div class="topbar-meta"><span class="live-dot"></span> Practice lab <span class="meta-divider">•</span>
+                    Class 10</div><button class="account-button" id="accountButton">Sign in</button>
+            </div>
+        </header>
+
+        <section class="account-gate" id="accountGate">
+            <div class="account-card">
+                <p class="eyebrow">Your private practice space</p>
+                <h1>Keep your progress<br><span>growing.</span></h1>
+                <p>Sign in with a first name to save scores, track pattern confidence, and keep questions fresh across
+                    rounds.</p>
+                <form id="loginForm"><label for="studentName">What should we call you?</label>
+                    <div class="login-row"><input id="studentName" name="studentName" maxlength="24"
+                            autocomplete="nickname" placeholder="e.g. Aanya" required><button class="primary-button"
+                            type="submit">Enter lab <span>→</span></button></div>
+                </form>
+                <small>This demo stores your progress only in this browser.</small>
+            </div>
+        </section>
+
+        <main id="top">
+            <section class="hero-section">
+                <div class="hero-copy">
+                    <p class="eyebrow">14 patterns. One clever brain.</p>
+                    <h1>Make maths<br><span>click.</span></h1>
+                    <p class="hero-text">Pick a pattern, beat the clock, and learn the move behind every answer.</p>
+                    <div class="hero-actions">
+                        <button class="primary-button" id="quickStart"><span>Start a quick quiz</span><span
+                                class="button-arrow">→</span></button>
+                        <button class="text-button" id="viewPatterns">Browse patterns <span>↓</span></button>
+                    </div>
+                </div>
+                <div class="hero-art" aria-label="Decorative math illustration">
+                    <div class="orbit orbit-one"></div>
+                    <div class="orbit orbit-two"></div>
+                    <div class="formula formula-one">x² + y²</div>
+                    <div class="formula formula-two">√2</div>
+                    <div class="formula formula-three">a² − b²</div>
+                    <div class="hero-badge"><strong>3:00</strong><span>Focus mode</span></div>
+                    <div class="spark spark-one">+</div>
+                    <div class="spark spark-two">×</div>
+                    <div class="spark spark-three">?</div>
+                </div>
+            </section>
+
+            <section class="workspace-section" id="patterns">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Choose your challenge</p>
+                        <h2>Find your pattern</h2>
+                    </div>
+                    <span class="pattern-count">14 patterns</span>
+                </div>
+                <div class="pattern-grid" id="patternGrid"></div>
+            </section>
+
+            <section class="progress-section" id="progressSection">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Your learning trail</p>
+                        <h2 id="progressTitle">Sign in to see progress</h2>
+                    </div><span class="pattern-count" id="roundCount">0 rounds</span>
+                </div>
+                <div class="progress-overview">
+                    <div class="progress-stat"><span>Overall accuracy</span><strong id="overallAccuracy">0%</strong>
+                    </div>
+                    <div class="progress-stat"><span>Questions answered</span><strong id="questionsAnswered">0</strong>
+                    </div>
+                    <div class="progress-stat"><span>Strongest pattern</span><strong id="strongestPattern">—</strong>
+                    </div>
+                </div>
+                <p class="chart-caption">Pattern proficiency graph</p>
+                <div class="proficiency-list" id="proficiencyList"></div>
+            </section>
+        </main>
+
+        <div class="account-modal hidden" id="accountModal" role="dialog" aria-modal="true"
+            aria-labelledby="accountModalTitle">
+            <div class="account-modal-card"><button class="modal-close" id="closeAccount" aria-label="Close">×</button>
+                <p class="eyebrow">Student account</p>
+                <h2 id="accountModalTitle">Your Math Quest profile</h2>
+                <p id="accountSummary"></p><button class="secondary-button" id="switchAccount">Switch student</button>
+            </div>
+        </div>
+
+        <section class="quiz-view hidden" id="quizView" aria-live="polite">
+            <div class="quiz-topline">
+                <button class="back-button" id="quitQuiz">← <span>All patterns</span></button>
+                <div class="quiz-title"><span class="pattern-kicker" id="quizKicker"></span>
+                    <h2 id="quizPatternName"></h2>
+                </div>
+                <div class="timer" id="timer"><span class="timer-icon">◷</span><span id="timerText">3:00</span></div>
+            </div>
+            <div class="quiz-progress">
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div><span id="questionProgress">Question 1</span>
+            </div>
+            <div class="quiz-layout">
+                <article class="question-card">
+                    <div class="question-label"><span id="questionNumber">QUESTION 01</span><span class="difficulty"
+                            id="difficulty">Warm-up</span></div>
+                    <h3 id="questionText"></h3>
+                    <div class="options" id="options"></div>
+                    <div class="feedback" id="feedback" hidden></div>
+                    <div class="question-actions">
+                        <button class="hint-button" id="hintButton">💡 Show hint</button>
+                        <button class="next-button" id="nextButton" disabled>Next question <span>→</span></button>
+                    </div>
+                    <div class="hint-box" id="hintBox" hidden></div>
+                </article>
+                <aside class="coach-card">
+                    <div class="coach-avatar">✦</div>
+                    <p class="eyebrow">Your coach</p>
+                    <h3>Think in steps.</h3>
+                    <p id="coachText">Look for the relationship hiding in the numbers before you calculate.</p>
+                    <div class="coach-rule"></div>
+                    <div class="score-mini"><span>Current score</span><strong id="scoreText">0</strong></div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="results-view hidden" id="resultsView">
+            <div class="results-card">
+                <div class="result-orbit">✦</div>
+                <p class="eyebrow">Round complete</p>
+                <h1 id="resultTitle">Nice work!</h1>
+                <p id="resultSubtitle"></p>
+                <div class="result-score"><strong id="finalScore">0</strong><span>correct</span></div>
+                <div class="result-stats">
+                    <div><strong id="accuracy">0%</strong><span>Accuracy</span></div>
+                    <div><strong id="timeUsed">0:00</strong><span>Time used</span></div>
+                    <div><strong id="patternResult">Pattern</strong><span>Focus area</span></div>
+                </div>
+                <div class="results-actions"><button class="primary-button" id="retryQuiz">Try again
+                        <span>↻</span></button><button class="secondary-button" id="chooseAnother">Choose another
+                        pattern</button></div>
+            </div>
+            <div class="review-section">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">Tiny recap</p>
+                        <h2>What you practised</h2>
+                    </div>
+                </div>
+                <div class="review-list" id="reviewList"></div>
+            </div>
+        </section>
+
+        <footer class="footer"><span>Math Quest</span><span>Built for curious minds</span><span>14 patterns • 3 minute
+                rounds</span></footer>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
